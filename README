@@ -1,0 +1,30 @@
+This is a CScNetLib-server lib configuration and logging project(configuration reading and logging).The project barely does much other than reading and validating the settings that are read from config.ini and logging the messages into server.log
+Steps:
+Download and unpack the CScNetLib library
+Use the following from the command line:-    $ wget https://github.com/drbraithw8/CscNetlib/archive/master.zip 
+
+Unpack the library
+    $ unzip master.zip 
+    
+rename it to something shorter.
+    $ mv CscNetlib­master CscNetlib 
+    
+Compile (Make) it
+$ cd CscNetlib 
+     $ ls 
+     $ make 
+     $ ls
+     
+ Install with previlages
+ 
+ $ sudo bash install.sh 
+ 
+ Clone or download the project code
+ 
+ Compile the server
+ 
+$ make 
+
+Run the server
+
+$./server
