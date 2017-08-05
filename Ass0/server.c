@@ -10,81 +10,89 @@
 #define MaxLineLen 255
 #define MaxLineWords 2
 
-
-int main(int argc, char **argv)
-{   int retVal,Port,logLevel;
- char IP;
-
-// Create the iniFile object.
-    csc_ini_t *ini = csc_ini_new();
-
- // Create the logging object.
-    csc_log_t *log = csc_log_new("server.log", 2);
-    if (log == NULL)
-        return csc_FALSE;
-
-// Read in the iniFile.
-    retVal = csc_ini_read(ini, "config.ini");
-    if (retVal < 0)
-    {   csc_log_printf(log, csc_log_FATAL
-               , "Error: Failed to open configuration file config.ini!\n"
-               );
-        exit(1);
+//Splite the values to key and value
+int testLookup(csc_ini_t *ini, char *section, char *key) 
+{   char *value = csc_ini_getAllocStr(ini, section, key);
+    if (value != NULL)
+    {   printf("%s,%s: \"%s\"\n", section, key, value);
+    	validate_andLog(section, key, value);
+        free(value);
+        return valiable;
     }
-    else if (retVal > 0)
-    {   csc_log_printf(log, 3
-               , "Error reading line %d of configuration file config.ini!\n"
-               , retVal
-               );
-        exit(1);
-    }   
+    else
+    {   printf("%s,%s: (not found)\n", section, key);
+    return 0;
+    }
+}
 
-// Get property requests from the command line.
-    char line[MaxLineLen+1];
-    char *words[MaxLineWords+1];
- 	while (words != 0)
-	{   int nWords = csc_param_quote(words, line, MaxLineWords+1);
-        const char *value = csc_ini_getStr(ini, words[0], words[1]);
-        if (value == NULL)
-        {   csc_log_printf(log, 3
-             , "There is no value for key \"%s\" in section \"%s\".\n"
-             , words[1], words[0]
-               );
-        }
-        else
-         {   csc_log_printf(log, 6
-                 , "The key for \"%s\" in section \"%s\" is \"%s\".\n"
-                 , words[1], words[0], value
-                 );
-		  if(words[1] == "IP")
-			  IP = words[1];
-		  if(words[1] == "Port")
-			  Port = words[1];
-		  if(words[1] == "logLevel")
-			  logLevel = words[1];
-         }
+void validate_andLog(char *section, char *key, char *val)
 	
-	 //Validating the Server IP 
+{	int Port,logLevel;
+ 	char *IP;
+	if(key == "IP")
+		IP = val;
+	if(key == "Port")
+		Port = val;
+	if(key == "Level")
+		logLevel = &val;
+		
+	// Create the logging object.
+    	csc_log_t *log = csc_log_new("server.log", 2);
+    	if (log == NULL)
+        	return csc_FALSE;
+        	
+	//Validating the Server IP 
 	 if (!csc_isValid_ipV4(IP))
-		 csc_log_printf(log, csc_log_FATAL, "invalid IP address %s", IP);
+		 csc_log_printf(log, 1, "invalid IP address %s", IP);
 	 //Validating target Port to be within 1025 and 65535
 	 else if (!csc_isValidRange_int(Port, 1025, 65535, &Port))
-		 csc_log_printf(log, csc_log_FATAL, "invalid Port %d", Port);
+		 csc_log_printf(log, 1, "invalid Port %d", &Port);
 	 // Check the log level from configurations (2)
 	 else if (!csc_isValidRange_int(logLevel, csc_log_TRACE, csc_log_FATAL, &logLevel))
-        csc_log_printf(log, csc_log_FATAL, "invalid Log level %d", logLevel);
-	 else
-		{   fprintf( stdout
-                       , "The server is ready to serve\"%s\" on\"%d\".\n"
-                       , &IP,&Port
+	{	csc_log_printf(log, csc_log_FATAL, "invalid Log level %d", &logLevel);
+        }   
+	csc_log_printf(log, 7,  "Now serving on IP \"%s\" on port number\"%d\".\n"
+                       , IP,&Port
                        );
-		} 
-	}
- 	// Release log resources.
-    csc_log_free(log);
- 	// Release file resources.
+	fprintf( stdout
+                       , "Now serving on IP\"%s\" on port number\"%d\".\n"
+                       , IP,&Port
+                       );
+	// Release log resources.
+	csc_log_free(log);
+}
+
+int main()
+{  
+	// Create the iniFile object. 
+    char *iniFilePath;
+    csc_ini_t *ini;
+    int errLineNo;
+    char *section;
+ 	// Read in the iniFile.
+    iniFilePath = "config.ini";
+    ini = csc_ini_new();
+    errLineNo = csc_ini_read(ini, iniFilePath);
+ 
+    if (errLineNo == -1)
+    {   fprintf(stderr, "Error opening in ini file \"%s\"\n", iniFilePath);
+    }
+    else if (errLineNo > 0)
+    {   fprintf(stderr, "Error at line number %d in ini file \"%s\"\n",
+                        errLineNo, iniFilePath);
+    }
+    else
+    {   section = "Server"; 
+        testLookup(ini,section,"IP");
+        testLookup(ini,section,"Port");
+ 
+        section = "Logging";   
+        testLookup(ini,section,"Level");
+    } 
+    // Release file resources.   
     csc_ini_free(ini);
     exit(0);
 }
 
+    
 
