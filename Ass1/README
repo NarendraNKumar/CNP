@@ -1,1 +1,9 @@
 This is Assignment1
+
+Part1: entails clients code to enable EdolaHTTPClient to connect a server and error handling
+
+Part2: entails Server code to enable EdolaHTTPServer listening to a client connection, reading the configurations, logging and error handling.
+
+Part3: entails reading JSON object from a JSON file and printing out the results
+
+Part4: enhances the and EdolaHTTPClient, and EdolaHTTPServer with reading of settings, logging, reading from JSON object file and excahnge of JSON objects and as well error handling.
