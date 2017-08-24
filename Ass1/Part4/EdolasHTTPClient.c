@@ -19,28 +19,32 @@ int main(int argc, char **argv)
 // Make the connection.
     ntp = csc_cli_new();
     if( ntp == NULL)
-    {	printf("Sorry Failed to Create new netCli object!");
+    {	printf("Sorry Failed to Create new netCli object!\n");
     	exit(1);
     }
+    else printf("Created new netCli object!\n");
     servConn = csc_cli_setServAddr(ntp, "TCP", "127.0.0.1", 9991);
     if( servConn == -1)
-    {	fprintf(stdout,"Sorry invalid client endpoint parameters: \"%s\"\n", csc_cli_getErrMsg(servConn));
+    {	fprintf(stdout,"Sorry invalid client endpoint parameters: \"%s\"\n", csc_cli_getErrMsg(ntp));
     	exit(1);
     }
+    else printf("All Client Parameters loaded successful!\n");
     fdes = csc_cli_connect(ntp);
     if( fdes == -1)
-    {	fprintf(stdout,"Sorry, server connection unsuccessful: \"%s\"\n", csc_cli_getErrMsg(fdes));
+    {	fprintf(stdout,"Sorry, server connection unsuccessful: \"%s\"\n", csc_cli_getErrMsg(ntp));
     	exit(1);
     }
+    else printf("Server connected successfuly!\n");
     csc_cli_free(ntp);
 
 // Make FILE* of file descriptor.
     fp = fdopen(fdes, "r+");
     if(fp == NULL)
-    {	printf("Sorry failed to open and read the stream!");
-    	close(fdes);
+    {	printf("Sorry failed to open and read the stream!\n");
+    	fclose(fp);
       	exit(1);
     }
+    else printf("Stream read Successfully\n");
 
 // Data to send.
     const char *sendData[] = 
@@ -64,14 +68,14 @@ int main(int argc, char **argv)
     while(!isFin)
     {   int lineLen = csc_fgetline(fp, line, LINE_MAX);
         if (lineLen < 0)
-        {   printf("EOF\n");
-            isFin = csc_TRUE;
-        }
-        else
-        {   printf("Got %3d \"%s\"\n", ++lineNo, line);
-            // if (csc_streq(line,""))
-            // {    isFin = csc_TRUE;
-            // }
+        {   if (csc_streq(line,""))
+             {  printf("Got %3d \"%s\"\n", ++lineNo, line);
+             	isFin = csc_TRUE;
+            	}
+		else
+		{	printf("EOF\n");
+		    	isFin = csc_TRUE;
+		}  
         }
     }
     fclose(fp);

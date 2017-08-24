@@ -9,19 +9,66 @@
 
 #define MaxLineLen 255
 #define MaxLineWords 2
+
+//Splite the values to key and value
+int testLookup(csc_ini_t *ini, char *section, char *key) 
+{	int Port=0,LogLevel=0;
+	char *value = csc_ini_getAllocStr(ini, section, key);
+	// Create the logging object
+	csc_log_t *log = csc_log_new("server.log", 2);
+	//if (log == NULL)return csc_FALSE;
+	
+	if (value != NULL)
+	{	if(key == "IP")
+		{	//Validating the Server IP 
+	 		if (!csc_isValid_ipV4(value))
+	 		{	csc_log_printf(log, csc_log_FATAL, "FATAL: invalid IP address \"%s\"\n", value);
+	 			exit(1);
+	 		}
+	 		//else return value;
+	 		
+	 	}
+		if(key == "Port")
+		{	//Validating target Port to be within 1025 and 65535
+	 		if (!csc_isValidRange_int(value, 1025, 65535, &Port))
+	 		{	csc_log_printf(log, csc_log_FATAL, "FATAL: invalid Port \"%d\"\n", Port);
+	 			exit(1);
+	 		}
+	 		else return Port;
+	 	}
+		if(key == "Level")
+		{	// Check the log level from configurations
+	 		if (!csc_isValidRange_int(value, csc_log_TRACE, csc_log_FATAL, &LogLevel))
+			{	csc_log_printf(log, csc_log_FATAL, "FATAL: invalid Log level \"%d\"\n", LogLevel);
+			}
+			else return LogLevel;
+		}
+	
+        	free(value);
+	}	
+	else
+	{	csc_log_printf(log, csc_log_FATAL,"\"%s,\"%s: (not found)\"\n", section, key);
+		exit(1);		
+    	}
+    	// Release log resources.
+	csc_log_free(log);
+	return 0;
+}     
+
+
+
 int main(int argc, char **argv)
 {   	csc_srv_t *ntp = NULL;
-    	int fd = -1;int Port,servConn;
-	char IP, logLevel;
-    	char line[MaxLineLen+1],CliConnAccepted;
- 	// Create the iniFile object. 
-	char *iniFilePath;
+    	int fd = -1;int Port;
+	const char *IP, *iniFilePath;
+    	char line[MaxLineLen+1], logLevel;
+ 	// Create the iniFile object.
 	csc_ini_t *ini;
 	int errLineNo;
-	char *section;
+	char *section;const char *Server_IP;
 	//Defination of response resource members
 	csc_jsonErr_t errNum;
-	char requestedProt, rRequest, requestedFile,requestedHost,requestedConn;
+	const char *requestedProt, *rRequest, *requestedFile,*requestedHost,*requestedConn;
 	int file_length, statusCode;
 	
  	// Read in the iniFile.
@@ -30,7 +77,7 @@ int main(int argc, char **argv)
 	errLineNo = csc_ini_read(ini, iniFilePath);
 	
 	// Create the logging object
-	csc_log_t *log = csc_log_new("server.log", 2);
+	csc_log_t *log = csc_log_new("server.log", csc_log_NOTICE);
  
 	if (errLineNo == -1)
 	{   csc_log_printf(log,3, "Error opening in ini file \"%s\"\n", iniFilePath);
@@ -41,7 +88,7 @@ int main(int argc, char **argv)
 	}
 	else
 	{	section = "Server"; 
-		testLookup(ini,section,"IP");
+		IP = csc_ini_getStr(ini, "ServerAddress", "IP");
 		Port = testLookup(ini,section,"Port");
 	 	section = "Logging";   
 		logLevel = testLookup(ini,section,"Level");
@@ -49,28 +96,32 @@ int main(int argc, char **argv)
 	// Create netSrv object.
 	ntp = csc_srv_new();
 	if( ntp == NULL)
-	{	csc_log_printf(log,3, "Failed to Create new netCli object!\"\n");
+	{	csc_log_printf(log,csc_log_FATAL, "FATAL: Failed to Create new netCli object!\"\n");
 		exit(1);
 	}
+	//stpcpy(IP,Server_IP);
 	IP ="127.0.0.1";
-	servConn = csc_srv_setAddr(ntp, "TCP", IP, Port, -1);
+	int servConn = csc_srv_setAddr(ntp, "TCP", IP, Port, -1);
 	if( servConn == 0)
-	{	csc_log_printf(log,3 ,"Invalid server endpoint parameters: \"%s\"\n", csc_srv_getErrMsg(servConn));
+	{	csc_log_printf(log,csc_log_ERROR ,"ERROR: Invalid server endpoint parameters: \"%s\"\n", csc_srv_getErrMsg(ntp));
 		exit(1);
 	}	
-	
+	else
+	{	csc_log_printf(log, csc_log_NOTICE,  " INFO: Now serving on IP \"%s\" on port number\"%d\".\n", IP,Port);
+		fprintf( stdout, "Now serving on IP\"%s\" on port number\"%d\".\n", IP,Port);
+	}
 
 	// For each successful connection.
 	while ((fd = csc_srv_accept(ntp)) >= 0)    
-	{   	CliConnAccepted = csc_srv_acceptAddr(ntp);
-		if( CliConnAccepted == NULL)
-		{	csc_log_printf(log,2,"The Client failed to connect!\"\n");
+	{   	const char *CliConnAccepted = csc_srv_acceptAddr(ntp);
+		if( &CliConnAccepted == NULL)
+		{	csc_log_printf(log,csc_log_ERROR,"ERROR: The Client failed to connect!\"\n");
 		}
 		fprintf(stdout, "Connection from \"%s\"\n", CliConnAccepted);
 		FILE *tcpStream = fdopen(fd, "r+");
 		if(tcpStream == NULL)
-		{	csc_log_printf(log,2,"Failed to open and read the stream!\"\n");
-			close(fd);
+		{	csc_log_printf(log,csc_log_ERROR,"ERROR: Failed to open and read the stream!\"\n");
+			fclose(tcpStream);
 		}
 		else 
 		{	//Received client input stream
@@ -78,18 +129,18 @@ int main(int argc, char **argv)
 			//Print the client request on standard output        
 			fprintf(stdout, "Received: \"%s\"\n", line);
 			//Print into log file
-			csc_log_printf(log,6,"Got line: \"%s\"\n", line);
+			csc_log_printf(log,6,"INFO: Got line: \"%s\"\n", line);
 			//Interprate the client request
-			printf("Client requires the HEAD of /index.html using the HTTP 1.1 protocol\"\n");
-			//Respond to the equest by processing JSON object stored in house.json file
+			if(line!="")
+			{	fprintf(stdout,"Client requires \"%s\"\n", line);
+				//Respond to the equest by processing JSON object stored in house.json file
+				fprintf(tcpStream,"From Server: You requested \"%s\"\n", line);
+			}
 			FILE *fin = fopen("house.json", "r");
 			
 			//Processing response from Json file
 			// Read json data.
 			csc_json_t *inData = csc_json_newParseFILE(fin);
-	
-			// Print out json object on standard output 
-			fprintf(fin, "\n");
 	
 			//Split into sub-data
 			requestedProt = csc_json_getStr(inData, "protocol", &errNum);
@@ -98,21 +149,29 @@ int main(int argc, char **argv)
 			requestedHost = csc_json_getStr(inData, "host", &errNum);
 			requestedConn = csc_json_getStr(inData, "connection", &errNum);
 			csc_json_free(inData);
+			printf("Json Data read successfuly!\n\n");
+			fprintf(stdout, "\tprotocol: \"%s\"\n", requestedProt);
+			fprintf(stdout, "\trequest: \"%s\"\n", rRequest);
+			fprintf(stdout, "\tpath: \"%s\"\n", requestedFile);
+			fprintf(stdout, "\thost: \"%s\"\n", requestedHost);
+			fprintf(stdout, "\tconnection: \"%s\"\n\n", requestedConn);
 	
-		 	// Check the existence of requested resourse
-			if (requestedFile == "/index.html")
+		 	// Check the existence of requested resource
+			if (requestedFile != "")
 			{	//Prepare the response code and fle size on Success.
+				fprintf(stdout, "Found: \"%s\"\n", requestedFile);
 				file_length = 20; 
 				statusCode = 200;				
 			}	
 			else 
-			{	//Prepare the response code and fle size
+			{	//Prepare the response code and file size
 				file_length = 0; 
-				statusCode = 404;			
+				statusCode = 404;
+				fprintf(stdout, "requested file not available\"\n");			
 			}
 	
 			//Sending out json data 
-			fprintf(tcpStream, fin,"\n");
+			fprintf(tcpStream, requestedFile,225);
 	
 			//Interprate the response on standard output
 			fprintf(stdout, 
@@ -134,50 +193,5 @@ int main(int argc, char **argv)
 	exit(0);
 }
 
-
-//Splite the values to key and value
-int testLookup(csc_ini_t *ini, char *section, char *key) 
-{	int Port=0,LogLevel=0;
-	char *value = csc_ini_getAllocStr(ini, section, key);
-	// Create the logging object
-	csc_log_t *log = csc_log_new("server.log", 2);
-	//if (log == NULL)return csc_FALSE;
-	
-	if (value != NULL)
-	{	if(key == "IP")
-		{	//Validating the Server IP 
-	 		if (!csc_isValid_ipV4(value))
-	 		{	csc_log_printf(log, 1, "invalid IP address \"%s\"\n", value);
-	 			exit(1);
-	 		}
-	 		//else return value;
-	 		
-	 	}
-		if(key == "Port")
-		{	//Validating target Port to be within 1025 and 65535
-	 		if (!csc_isValidRange_int(value, 1025, 65535, &Port))
-	 		{	csc_log_printf(log, 1, "invalid Port \"%d\"\n", Port);
-	 			exit(1);
-	 		}
-	 		else return Port;
-	 	}
-		if(key == "Level")
-		{	// Check the log level from configurations
-	 		if (!csc_isValidRange_int(value, csc_log_TRACE, csc_log_FATAL, &LogLevel))
-			{	csc_log_printf(log, csc_log_FATAL, "invalid Log level \"%d\"\n", LogLevel);
-			}
-			else return LogLevel;
-		}
-	
-        	free(value);
-	}	
-	else
-	{	csc_log_printf(log, csc_log_FATAL,"\"%s,\"%s: (not found)\"\n", section, key);
-		exit(1);		
-    	}
-    	// Release log resources.
-	csc_log_free(log);
-	return 0;
-}     
 
 

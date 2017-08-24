@@ -9,180 +9,22 @@ Now serving on IP 127.0.0.1 on port number 8082
 2[20170805.060306]20696 Logging commenced
 3[20170805.060306]IP 127.0.0.1 :Port 8082.
 Now serving on IP 127.0.0.1 on port number 8082
-2[20170818.210628]28658 Logging commenced
-2[20170818.210628]28658 Logging commenced
-2[20170818.212118]28941 Logging commenced
-2[20170818.212118]28941 Logging commenced
-2[20170818.214001]29366 Logging commenced
-2[20170818.214001]29366 Logging commenced
-2[20170818.214106]29428 Logging commenced
-2[20170818.214106]29428 Logging commenced
-2[20170818.214237]29507 Logging commenced
-2[20170818.214237]29507 Logging commenced
-2[20170818.214237]29507 Logging commenced
-2[20170818.214237]29507 Logging commenced
-5[20170818.214237]invalid Log level -235095156
-7[20170818.214237]Now serving on IP "(null)" on port number"-235095100".
 
-2[20170818.214730]29624 Logging commenced
-2[20170818.214730]29624 Logging commenced
-2[20170818.214730]29624 Logging commenced
-2[20170818.215014]29658 Logging commenced
-2[20170818.215014]29658 Logging commenced
-2[20170818.215014]29658 Logging commenced
-2[20170818.215353]29696 Logging commenced
-2[20170818.215353]29696 Logging commenced
-2[20170818.215353]29696 Logging commenced
-2[20170818.215819]29799 Logging commenced
-2[20170818.215819]29799 Logging commenced
-2[20170818.215819]29799 Logging commenced
-2[20170818.215907]29833 Logging commenced
-2[20170818.215907]29833 Logging commenced
-2[20170818.215907]29833 Logging commenced
-2[20170818.215955]29863 Logging commenced
-2[20170818.215955]29863 Logging commenced
-2[20170818.215955]29863 Logging commenced
-2[20170818.220033]29905 Logging commenced
-2[20170818.220033]29905 Logging commenced
-2[20170818.220033]29905 Logging commenced
-2[20170818.220033]29905 Logging commenced
-2[20170818.220255]29953 Logging commenced
-2[20170818.220255]29953 Logging commenced
-2[20170818.220255]29953 Logging commenced
-2[20170818.220444]29994 Logging commenced
-2[20170818.220444]29994 Logging commenced
-2[20170818.220444]29994 Logging commenced
-2[20170818.220511]30021 Logging commenced
-2[20170818.220511]30021 Logging commenced
-2[20170818.220511]30021 Logging commenced
-2[20170818.220720]30053 Logging commenced
-2[20170818.220720]30053 Logging commenced
-2[20170818.220720]30053 Logging commenced
-2[20170818.220950]30149 Logging commenced
-2[20170818.220950]30149 Logging commenced
-2[20170818.220950]30149 Logging commenced
-2[20170818.221244]30205 Logging commenced
-2[20170818.221244]30205 Logging commenced
-2[20170818.221244]30205 Logging commenced
-2[20170818.221914]30355 Logging commenced
-2[20170818.221914]30355 Logging commenced
-2[20170818.221914]30355 Logging commenced
-2[20170818.221914]30355 Logging commenced
-7[20170818.221914]Now serving on IP "(null)" on port number"8082".
+7[20170819.103453]Now serving on IP "127.0.0.1" on port number"8082".
 
-2[20170818.222017]30396 Logging commenced
-2[20170818.222017]30396 Logging commenced
-2[20170818.222017]30396 Logging commenced
-2[20170818.222017]30396 Logging commenced
-7[20170818.222017]Now serving on IP "" on port number"8082".
+7[20170824.211746]Now serving on IP "127.0.0.1" on port number"8082".
 
-2[20170818.222732]30546 Logging commenced
-2[20170818.222732]30546 Logging commenced
-2[20170818.222732]30546 Logging commenced
-2[20170818.222732]30546 Logging commenced
-7[20170818.222732]Now serving on IP "(null)" on port number"8082".
+7[20170824.215930]Now serving on IP "127.0.0.1" on port number"9991".
 
-2[20170818.222950]30622 Logging commenced
-2[20170818.222950]30622 Logging commenced
-2[20170818.222950]30622 Logging commenced
-2[20170818.222950]30622 Logging commenced
-7[20170818.222950]Now serving on IP "0’" on port number"8082".
+6[20170824.215938]Got line: "HEAD /index.html HTTP/1.1"
 
-2[20170818.223655]30837 Logging commenced
-2[20170818.223655]30837 Logging commenced
-2[20170818.223655]30837 Logging commenced
-2[20170818.223655]30837 Logging commenced
-7[20170818.223655]Now serving on IP "" on port number"8082".
+7[20170824.220215]INFO: Now serving on IP "127.0.0.1" on port number"9991".
 
-2[20170818.224215]30944 Logging commenced
-2[20170818.224215]30944 Logging commenced
-2[20170818.224215]30944 Logging commenced
-2[20170818.224215]30944 Logging commenced
-7[20170818.224215]Now serving on IP "P’" on port number"8082".
+6[20170824.220243]INFO: Got line: ""
 
-2[20170818.224526]30985 Logging commenced
-2[20170818.224526]30985 Logging commenced
-2[20170818.224526]30985 Logging commenced
-2[20170818.224526]30985 Logging commenced
-7[20170818.224526]Now serving on IP "" on port number"8082".
+6[20170824.220300]INFO: Got line: "HEAD /index.html HTTP/1.1"
 
-2[20170818.233615]31950 Logging commenced
-2[20170818.233615]31950 Logging commenced
-2[20170818.233615]31950 Logging commenced
-2[20170818.233615]31950 Logging commenced
-7[20170818.233615]Now serving on IP "’" on port number"8082".
+3[20170824.221541]FATAL: Invalid server endpoint parameters: "bind:Address already in use"
 
-2[20170818.233742]31976 Logging commenced
-2[20170818.233742]31976 Logging commenced
-2[20170818.233742]31976 Logging commenced
-2[20170818.233742]31976 Logging commenced
-7[20170818.233742]Now serving on IP "’" on port number"8082".
-
-2[20170818.233804]31987 Logging commenced
-2[20170818.233804]31987 Logging commenced
-2[20170818.233804]31987 Logging commenced
-2[20170818.233804]31987 Logging commenced
-7[20170818.233804]Now serving on IP "’" on port number"8082".
-
-2[20170818.234802]32329 Logging commenced
-2[20170818.234802]32329 Logging commenced
-2[20170818.234802]32329 Logging commenced
-2[20170818.234802]32329 Logging commenced
-7[20170818.234802]Now serving on IP "0’ÿÿÿ" on port number"-110".
-
-2[20170818.235236]32450 Logging commenced
-2[20170818.235236]32450 Logging commenced
-2[20170818.235236]32450 Logging commenced
-2[20170818.235236]32450 Logging commenced
-7[20170818.235236]Now serving on IP "0’" on port number"8082".
-
-2[20170819.000036]32671 Logging commenced
-2[20170819.000036]32671 Logging commenced
-2[20170819.000036]32671 Logging commenced
-2[20170819.000036]32671 Logging commenced
-7[20170819.000036]Now serving on IP "(null)" on port number"8082".
-
-2[20170819.000934]379 Logging commenced
-2[20170819.000934]379 Logging commenced
-2[20170819.000934]379 Logging commenced
-2[20170819.000934]379 Logging commenced
-7[20170819.000934]Now serving on IP "(null)" on port number"8082".
-
-2[20170819.001039]431 Logging commenced
-2[20170819.001039]431 Logging commenced
-2[20170819.001039]431 Logging commenced
-2[20170819.001039]431 Logging commenced
-7[20170819.001039]Now serving on IP "@" on port number"8082".
-
-2[20170819.001429]636 Logging commenced
-2[20170819.001429]636 Logging commenced
-2[20170819.001429]636 Logging commenced
-2[20170819.001429]636 Logging commenced
-7[20170819.001429]Now serving on IP "(null)" on port number"8082".
-
-2[20170819.003026]859 Logging commenced
-2[20170819.003026]859 Logging commenced
-2[20170819.003026]859 Logging commenced
-2[20170819.003026]859 Logging commenced
-2[20170819.003125]907 Logging commenced
-2[20170819.003125]907 Logging commenced
-2[20170819.003125]907 Logging commenced
-2[20170819.003125]907 Logging commenced
-7[20170819.003125]Now serving on IP "127" on port number"8082".
-
-2[20170819.003259]961 Logging commenced
-2[20170819.003259]961 Logging commenced
-2[20170819.003259]961 Logging commenced
-2[20170819.003259]961 Logging commenced
-7[20170819.003259]Now serving on IP "127" on port number"8082".
-
-2[20170819.003334]1026 Logging commenced
-2[20170819.003334]1026 Logging commenced
-2[20170819.003453]1052 Logging commenced
-2[20170819.003453]1052 Logging commenced
-2[20170819.003619]1127 Logging commenced
-2[20170819.003619]1127 Logging commenced
-2[20170819.003619]1127 Logging commenced
-2[20170819.003619]1127 Logging commenced
-7[20170819.003619]Now serving on IP "0" on port number"8082".
+3[20170824.223455]FATAL: Invalid server endpoint parameters: "bind:Address already in use"
 

@@ -6,7 +6,7 @@
 
 void processData(FILE *fin, FILE *fout)
 {	csc_jsonErr_t errNum;
-	char requestedProt, rRequest, requestedFile,requestedHost,requestedConn;
+	const char *requestedProt, *rRequest, *requestedFile,*requestedHost,*requestedConn;
 	int file_length, statusCode;
  
 // Read json data.
@@ -19,19 +19,24 @@ void processData(FILE *fin, FILE *fout)
 	csc_json_free(inData);
  
 // Print out the data.
-	fprintf(fin, "\n");
+	printf("Json Data read successfuly!\n\n");
+	fprintf(stdout, "\tprotocol: \"%s\"\n", requestedProt);
+	fprintf(stdout, "\trequest: \"%s\"\n", rRequest);
+	fprintf(stdout, "\tpath: \"%s\"\n", requestedFile);
+	fprintf(stdout, "\thost: \"%s\"\n", requestedHost);
+	fprintf(stdout, "\tconnection: \"%s\"\n\n", requestedConn);
 	
 // Check the existence of requestedFile
-if (requestedFile == "/index.html")
+if (requestedFile != "/index.html")
 {	file_length = 20; 
 	statusCode = 200;
 	
-	fprintf(stdout, "The file exists, the file length is %d and staus code is %d .", file_length, statusCode);
+	fprintf(stdout, "The file exists, the file length is %d and status code is %d \n.", file_length, statusCode);
 }
 else 
 {	file_length = 0; 
 	statusCode = 404;
-	fprintf(stdout, "The file does not exist, the file length is %d and staus code is %d .", file_length, statusCode);	
+	fprintf(stdout, "The file does not exist, the file length is %d and status code is %d \n.", file_length, statusCode);	
 }
 }
 

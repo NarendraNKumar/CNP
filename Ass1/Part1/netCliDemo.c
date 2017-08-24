@@ -24,24 +24,25 @@ int main(int argc, char **argv)
     }
     servConn = csc_cli_setServAddr(ntp, "TCP", "127.0.0.1", 9991);
     if( servConn == -1)
-    {	fprintf(stdout,"Sorry invalid client endpoint parameters: %s", csc_cli_getErrMsg(servConn));
+    {	fprintf(stdout,"Sorry invalid client endpoint parameters: %s\n", csc_cli_getErrMsg(ntp));
     	exit(1);
     }
     fdes = csc_cli_connect(ntp);
     if( fdes == -1)
-    {	fprintf(stdout,"Sorry, server connection unsuccessful: %s", csc_cli_getErrMsg(fdes));
+    {	fprintf(stdout,"Sorry, server connection unsuccessful: %s\n", csc_cli_getErrMsg(ntp));
     	exit(1);
     }
     csc_cli_free(ntp);
 
 // Make FILE* of file descriptor.
-    fp = fdopen(fdes, "r+");
+    fp = fdopen(fdes, "r");
     if(fp == NULL)
-    {	printf("Sorry failed to open and read the stream!");
-    	close(fdes);
+    {	printf("Sorry failed to open and read the stream!\n");
+    	fclose(fp);
       	exit(1);
     }
-
+    else printf("Stream opened successfully.\n");
+	
 // Data to send.
     const char *sendData[] = 
     { "HEAD /index.html HTTP/1.1"

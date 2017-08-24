@@ -1,0 +1,76 @@
+migwi@migwi-Aspire-E1-571:~/Desktop/nnk/NNK-Project/CNP/Ass1$ git add Ass1
+fatal: pathspec 'Ass1' did not match any files
+migwi@migwi-Aspire-E1-571:~/Desktop/nnk/NNK-Project/CNP/Ass1$ git add Part1
+migwi@migwi-Aspire-E1-571:~/Desktop/nnk/NNK-Project/CNP/Ass1$ git add netCliDemo.c
+fatal: pathspec 'netCliDemo.c' did not match any files
+migwi@migwi-Aspire-E1-571:~/Desktop/nnk/NNK-Project/CNP/Ass1$ cd Part1
+migwi@migwi-Aspire-E1-571:~/Desktop/nnk/NNK-Project/CNP/Ass1/Part1$ git add netCliDemo.c
+migwi@migwi-Aspire-E1-571:~/Desktop/nnk/NNK-Project/CNP/Ass1/Part1$ git add makefile
+migwi@migwi-Aspire-E1-571:~/Desktop/nnk/NNK-Project/CNP/Ass1/Part1$ cd ..
+migwi@migwi-Aspire-E1-571:~/Desktop/nnk/NNK-Project/CNP/Ass1$ git add Part2
+migwi@migwi-Aspire-E1-571:~/Desktop/nnk/NNK-Project/CNP/Ass1$ git add netSrvDemo.c
+fatal: pathspec 'netSrvDemo.c' did not match any files
+migwi@migwi-Aspire-E1-571:~/Desktop/nnk/NNK-Project/CNP/Ass1$ cd Part2
+migwi@migwi-Aspire-E1-571:~/Desktop/nnk/NNK-Project/CNP/Ass1/Part2$ git add netSrvDemo.c
+migwi@migwi-Aspire-E1-571:~/Desktop/nnk/NNK-Project/CNP/Ass1/Part2$ git add makefile
+migwi@migwi-Aspire-E1-571:~/Desktop/nnk/NNK-Project/CNP/Ass1/Part2$ git add config.ini
+migwi@migwi-Aspire-E1-571:~/Desktop/nnk/NNK-Project/CNP/Ass1/Part2$ git add server.log
+migwi@migwi-Aspire-E1-571:~/Desktop/nnk/NNK-Project/CNP/Ass1/Part2$ cd ..
+migwi@migwi-Aspire-E1-571:~/Desktop/nnk/NNK-Project/CNP/Ass1$ git add Part3
+migwi@migwi-Aspire-E1-571:~/Desktop/nnk/NNK-Project/CNP/Ass1$ git add jsonDemo.cfatal: pathspec 'jsonDemo.c' did not match any files
+migwi@migwi-Aspire-E1-571:~/Desktop/nnk/NNK-Project/CNP/Ass1$ cd Part3
+migwi@migwi-Aspire-E1-571:~/Desktop/nnk/NNK-Project/CNP/Ass1/Part3$ git add jsonDemo.c
+migwi@migwi-Aspire-E1-571:~/Desktop/nnk/NNK-Project/CNP/Ass1/Part3$ git add makefile
+migwi@migwi-Aspire-E1-571:~/Desktop/nnk/NNK-Project/CNP/Ass1/Part3$ git add house.json
+migwi@migwi-Aspire-E1-571:~/Desktop/nnk/NNK-Project/CNP/Ass1/Part3$ cd ..
+migwi@migwi-Aspire-E1-571:~/Desktop/nnk/NNK-Project/CNP/Ass1$ git add Part4
+migwi@migwi-Aspire-E1-571:~/Desktop/nnk/NNK-Project/CNP/Ass1$ cd Part4
+migwi@migwi-Aspire-E1-571:~/Desktop/nnk/NNK-Project/CNP/Ass1/Part4$ git add EdolasHTTPServer.c
+migwi@migwi-Aspire-E1-571:~/Desktop/nnk/NNK-Project/CNP/Ass1/Part4$ cd EdolasHTTPClient.c
+bash: cd: EdolasHTTPClient.c: Not a directory
+migwi@migwi-Aspire-E1-571:~/Desktop/nnk/NNK-Project/CNP/Ass1/Part4$ git add EdolasHTTPClient.c
+migwi@migwi-Aspire-E1-571:~/Desktop/nnk/NNK-Project/CNP/Ass1/Part4$ git add makefile
+migwi@migwi-Aspire-E1-571:~/Desktop/nnk/NNK-Project/CNP/Ass1/Part4$ git add server.log
+migwi@migwi-Aspire-E1-571:~/Desktop/nnk/NNK-Project/CNP/Ass1/Part4$ git add config.ini
+migwi@migwi-Aspire-E1-571:~/Desktop/nnk/NNK-Project/CNP/Ass1/Part4$ cd ..
+migwi@migwi-Aspire-E1-571:~/Desktop/nnk/NNK-Project/CNP/Ass1$ git add README
+migwi@migwi-Aspire-E1-571:~/Desktop/nnk/NNK-Project/CNP/Ass1$ cd ..
+migwi@migwi-Aspire-E1-571:~/Desktop/nnk/NNK-Project/CNP$ cd Ass0
+migwi@migwi-Aspire-E1-571:~/Desktop/nnk/NNK-Project/CNP/Ass0$ git add server.c
+migwi@migwi-Aspire-E1-571:~/Desktop/nnk/NNK-Project/CNP/Ass0$ git commit -m "third_commit"
+[master b57c314] third_commit
+ 16 files changed, 890 insertions(+), 98 deletions(-)
+ rewrite Ass0/server.c (77%)
+ create mode 100755 Ass1/Part1/makefile
+ create mode 100644 Ass1/Part1/netCliDemo.c
+ create mode 100755 Ass1/Part2/config.ini
+ create mode 100755 Ass1/Part2/makefile
+ create mode 100644 Ass1/Part2/netSrvDemo.c
+ create mode 100755 Ass1/Part2/server.log
+ create mode 100644 Ass1/Part3/house.json
+ create mode 100644 Ass1/Part3/jsonDemo.c
+ create mode 100755 Ass1/Part3/makefile
+ create mode 100644 Ass1/Part4/EdolasHTTPClient.c
+ create mode 100644 Ass1/Part4/EdolasHTTPServer.c
+ create mode 100755 Ass1/Part4/config.ini
+ create mode 100755 Ass1/Part4/makefile
+ create mode 100755 Ass1/Part4/server.log
+migwi@migwi-Aspire-E1-571:~/Desktop/nnk/NNK-Project/CNP/Ass0$ git remote add origin https://github.com/NarendraNKumar/CNP.git
+fatal: remote origin already exists.
+migwi@migwi-Aspire-E1-571:~/Desktop/nnk/NNK-Project/CNP/Ass0$ git push origin master
+Username for 'https://github.com': NarendraNKumar
+Password for 'https://NarendraNKumar@github.com': 
+remote: Invalid username or password.
+fatal: Authentication failed for 'https://github.com/NarendraNKumar/CNP.git/'
+migwi@migwi-Aspire-E1-571:~/Desktop/nnk/NNK-Project/CNP/Ass0$ git push origin master
+Username for 'https://github.com': NarendraNKumar
+Password for 'https://NarendraNKumar@github.com': 
+Counting objects: 22, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (22/22), done.
+Writing objects: 100% (22/22), 6.49 KiB | 0 bytes/s, done.
+Total 22 (delta 5), reused 0 (delta 0)
+remote: Resolving deltas: 100% (5/5), completed with 2 local objects.
+To https://github.com/NarendraNKumar/CNP.git
+   80ce876..b57c314  master -> master
+
